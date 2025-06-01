@@ -475,27 +475,27 @@ ${imageDescription}
         <div className="mb-6">
           <label className="block text-white/70 text-sm mb-3">AI分析模型</label>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {imageModels.map(model => (
-              <button
-                key={model.name}
-                onClick={() => setImageModel(model.name)}
+              {imageModels.map(model => (
+                <button
+                  key={model.name}
+                  onClick={() => setImageModel(model.name)}
                 className={`p-3 rounded-lg transition-all text-left ${
-                  imageModel === model.name
-                    ? 'bg-purple-500/20 border border-purple-500/50 text-white'
-                    : 'bg-white/10 border border-white/20 text-white/70 hover:text-white'
-                }`}
-              >
-                <div className="flex justify-between items-start">
-                  <div>
+                    imageModel === model.name
+                      ? 'bg-purple-500/20 border border-purple-500/50 text-white'
+                      : 'bg-white/10 border border-white/20 text-white/70 hover:text-white'
+                  }`}
+                >
+                  <div className="flex justify-between items-start">
+                    <div>
                     <h5 className="font-medium text-sm">{model.displayName}</h5>
-                    <p className="text-xs opacity-80">{model.description}</p>
+                      <p className="text-xs opacity-80">{model.description}</p>
+                    </div>
+                    {model.recommended && (
+                      <span className="text-xs bg-purple-500 text-white px-2 py-1 rounded-full">推荐</span>
+                    )}
                   </div>
-                  {model.recommended && (
-                    <span className="text-xs bg-purple-500 text-white px-2 py-1 rounded-full">推荐</span>
-                  )}
-                </div>
-              </button>
-            ))}
+                </button>
+              ))}
           </div>
         </div>
       </motion.div>
@@ -618,10 +618,10 @@ ${imageDescription}
               <div className="bg-white/5 rounded-lg p-4">
                 <h4 className="text-white/90 font-medium mb-3 text-sm">第二阶段：医学分析报告</h4>
                 <div className="max-h-64 overflow-y-auto">
-                  <div className="text-white/90 text-sm leading-relaxed prose prose-invert prose-sm max-w-none">
-                    <ReactMarkdown 
-                      remarkPlugins={[remarkGfm]}
-                      components={{
+                <div className="text-white/90 text-sm leading-relaxed prose prose-invert prose-sm max-w-none">
+                  <ReactMarkdown 
+                    remarkPlugins={[remarkGfm]}
+                    components={{
                         h1: ({children}) => <h1 className="text-base font-bold mb-3 text-white border-b border-white/20 pb-1">{children}</h1>,
                         h2: ({children}) => <h2 className="text-sm font-semibold mb-2 text-white mt-4">{children}</h2>,
                         h3: ({children}) => <h3 className="text-sm font-medium mb-2 text-white mt-3">{children}</h3>,
@@ -629,26 +629,26 @@ ${imageDescription}
                         ul: ({children}) => <ul className="list-disc list-inside mb-3 text-white/90 text-sm space-y-1">{children}</ul>,
                         ol: ({children}) => <ol className="list-decimal list-inside mb-3 text-white/90 text-sm space-y-1">{children}</ol>,
                         li: ({children}) => <li className="text-sm text-white/85">{children}</li>,
-                        strong: ({children}) => <strong className="font-semibold text-white">{children}</strong>,
+                      strong: ({children}) => <strong className="font-semibold text-white">{children}</strong>,
                         em: ({children}) => <em className="italic text-white/90">{children}</em>,
                         blockquote: ({children}) => <blockquote className="border-l-4 border-purple-400 pl-4 my-3 text-white/80 bg-purple-500/10 py-2 rounded-r">{children}</blockquote>,
                         code: ({children}) => <code className="bg-white/10 px-1 py-0.5 rounded text-sm text-purple-200">{children}</code>,
-                      }}
-                    >
-                      {analysis.result}
-                    </ReactMarkdown>
+                    }}
+                  >
+                    {analysis.result}
+                  </ReactMarkdown>
                   </div>
                 </div>
               </div>
 
               <div className="flex gap-2">
-                <button
-                  onClick={() => exportAnalysis(analysis)}
+              <button
+                onClick={() => exportAnalysis(analysis)}
                   className="flex-1 bg-green-500/80 hover:bg-green-500 text-white px-3 py-2 rounded-lg text-sm transition-colors flex items-center justify-center gap-1"
-                >
+              >
                   <Download size={14} />
-                  导出报告
-                </button>
+                导出报告
+              </button>
               </div>
             </div>
           )}

@@ -368,13 +368,13 @@ function HeartbeatScene({ heartbeatData, setHeartbeatData }) {
     if (audioElement && audioContext && analyser && !mediaSource) {
       try {
         // 只有在没有现有连接时才创建新的 MediaElementSource
-        const source = audioContext.createMediaElementSource(audioElement)
+      const source = audioContext.createMediaElementSource(audioElement)
         const gain = audioContext.createGain()
-        
+      
         source.connect(gain)
         gain.connect(analyser)
-        analyser.connect(audioContext.destination)
-        
+      analyser.connect(audioContext.destination)
+      
         gain.gain.value = volume
         setMediaSource(source)
         setGainNode(gain)
@@ -422,7 +422,7 @@ function HeartbeatScene({ heartbeatData, setHeartbeatData }) {
         }
       }
       
-      updateAudioData()
+        updateAudioData()
     }
   }, [isPlaying, mediaSource, analyser])
 
@@ -561,20 +561,20 @@ function HeartbeatScene({ heartbeatData, setHeartbeatData }) {
           <div className="flex flex-col gap-3">
             {/* 文件上传和历史记录按钮 */}
             <div className="flex gap-2">
-              {!audioFile && (
+            {!audioFile && (
                 <label className="flex-1 cursor-pointer">
-                  <input
-                    type="file"
-                    accept="audio/*"
-                    onChange={handleFileUpload}
-                    className="hidden"
-                  />
+                <input
+                  type="file"
+                  accept="audio/*"
+                  onChange={handleFileUpload}
+                  className="hidden"
+                />
                   <div className="flex items-center justify-center gap-2 bg-heart-red/20 hover:bg-heart-red/30 text-white rounded-lg p-2 transition-all text-sm">
                     <Upload size={16} />
                     上传录音
-                  </div>
-                </label>
-              )}
+                </div>
+              </label>
+            )}
               
               {recordingHistory.length > 0 && (
                 <button
@@ -665,13 +665,13 @@ function HeartbeatScene({ heartbeatData, setHeartbeatData }) {
 
                 {/* 控制按钮 - 水平布局 */}
                 <div className="flex items-center gap-2">
-                  <button
-                    onClick={togglePlayPause}
+                <button
+                  onClick={togglePlayPause}
                     className="flex items-center gap-1 bg-heart-red/20 hover:bg-heart-red/30 text-white rounded-lg px-3 py-2 transition-all text-sm"
-                  >
+                >
                     {isPlaying ? <Pause size={16} /> : <Play size={16} />}
-                    {isPlaying ? '暂停' : '播放'}
-                  </button>
+                  {isPlaying ? '暂停' : '播放'}
+                </button>
 
                   <label className="cursor-pointer flex-1">
                     <input
@@ -688,17 +688,17 @@ function HeartbeatScene({ heartbeatData, setHeartbeatData }) {
 
                   <div className="flex items-center gap-1 flex-1">
                     <Volume2 size={14} className="text-white" />
-                    <input
-                      type="range"
-                      min="0"
-                      max="1"
-                      step="0.1"
-                      value={volume}
-                      onChange={handleVolumeChange}
-                      className="flex-1"
-                    />
-                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.1"
+                    value={volume}
+                    onChange={handleVolumeChange}
+                    className="flex-1"
+                  />
                 </div>
+              </div>
               </>
             )}
           </div>
@@ -720,7 +720,7 @@ function HeartbeatScene({ heartbeatData, setHeartbeatData }) {
           {recordingHistory.length > 0 && (
             <p className="text-xs text-white/60 mt-1">
               💾 {recordingHistory.length} 个录音
-            </p>
+          </p>
           )}
         </motion.div>
       </div>

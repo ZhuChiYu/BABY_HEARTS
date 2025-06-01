@@ -637,7 +637,7 @@ function NameGame() {
           console.log('🎯 [起名流程] 传统模式备选完成，名字数量:', newSuggestions.length)
           
           // 显示友好的错误提示
-          setTimeout(() => {
+    setTimeout(() => {
             alert(errorMessage)
           }, 500)
         }
@@ -687,15 +687,15 @@ function NameGame() {
   const generateTraditionalNames = () => {
     console.log('📚 [传统起名] 开始传统起名算法...')
     
-    const newSuggestions = []
-    const genderTypes = babyGender === 'unknown' ? ['boy', 'girl', 'neutral'] : [babyGender, 'neutral']
+      const newSuggestions = []
+      const genderTypes = babyGender === 'unknown' ? ['boy', 'girl', 'neutral'] : [babyGender, 'neutral']
     
     console.log('🎯 [传统起名] 性别类型:', genderTypes)
-    
-    // 获取父母姓氏
-    const fatherSurname = parentNames.father.charAt(0)
-    const motherSurname = parentNames.mother.charAt(0)
-    
+      
+      // 获取父母姓氏
+      const fatherSurname = parentNames.father.charAt(0)
+      const motherSurname = parentNames.mother.charAt(0)
+      
     console.log('👨‍👩‍👦 [传统起名] 姓氏信息:', {
       父亲姓氏: fatherSurname,
       母亲姓氏: motherSurname
@@ -703,56 +703,56 @@ function NameGame() {
     
     genderTypes.forEach((gender, genderIndex) => {
       console.log(`🔄 [传统起名] 处理第${genderIndex + 1}种类型: ${gender}`)
-      const names = nameDatabase[gender]
-      
-      // 单字名
-      const singleNames = [...names.single].sort(() => Math.random() - 0.5).slice(0, 3)
+        const names = nameDatabase[gender]
+        
+        // 单字名
+        const singleNames = [...names.single].sort(() => Math.random() - 0.5).slice(0, 3)
       console.log(`📝 [传统起名] ${gender}类型单字名:`, singleNames)
       
-      singleNames.forEach(name => {
-        // 随机选择父姓或母姓
-        const surname = Math.random() > 0.5 ? fatherSurname : motherSurname
-        const fullName = surname + name
-        newSuggestions.push({
-          name: fullName,
-          type: gender === 'neutral' ? '中性' : gender === 'boy' ? '男孩' : '女孩',
-          meaning: meanings[name] || '美好寓意，健康成长',
-          structure: '单字名',
+        singleNames.forEach(name => {
+          // 随机选择父姓或母姓
+          const surname = Math.random() > 0.5 ? fatherSurname : motherSurname
+          const fullName = surname + name
+          newSuggestions.push({
+            name: fullName,
+            type: gender === 'neutral' ? '中性' : gender === 'boy' ? '男孩' : '女孩',
+            meaning: meanings[name] || '美好寓意，健康成长',
+            structure: '单字名',
           source: `取自${surname === fatherSurname ? '父' : '母'}姓`,
           score: Math.floor(Math.random() * 20) + 80, // 80-99分
           elements: '综合平衡',
           pronunciation: '音韵和谐',
           isAI: false
+          })
         })
-      })
-      
-      // 双字名
-      const doubleNames = [...names.double].sort(() => Math.random() - 0.5).slice(0, 2)
+        
+        // 双字名
+        const doubleNames = [...names.double].sort(() => Math.random() - 0.5).slice(0, 2)
       console.log(`📝 [传统起名] ${gender}类型双字名:`, doubleNames)
       
-      doubleNames.forEach(name => {
-        const surname = Math.random() > 0.5 ? fatherSurname : motherSurname
-        const fullName = surname + name
-        newSuggestions.push({
-          name: fullName,
-          type: gender === 'neutral' ? '中性' : gender === 'boy' ? '男孩' : '女孩',
-          meaning: meanings[name] || '美好寓意，前程似锦',
-          structure: '双字名',
+        doubleNames.forEach(name => {
+          const surname = Math.random() > 0.5 ? fatherSurname : motherSurname
+          const fullName = surname + name
+          newSuggestions.push({
+            name: fullName,
+            type: gender === 'neutral' ? '中性' : gender === 'boy' ? '男孩' : '女孩',
+            meaning: meanings[name] || '美好寓意，前程似锦',
+            structure: '双字名',
           source: `取自${surname === fatherSurname ? '父' : '母'}姓`,
           score: Math.floor(Math.random() * 20) + 80, // 80-99分
           elements: '五行调和',
           pronunciation: '朗朗上口',
           isAI: false
+          })
         })
       })
-    })
-    
-    // 特殊组合：结合父母名字
+      
+      // 特殊组合：结合父母名字
     console.log('✨ [传统起名] 生成特殊组合名字...')
-    const specialCombos = generateSpecialCombos()
+      const specialCombos = generateSpecialCombos()
     console.log('🎯 [传统起名] 特殊组合结果:', specialCombos.map(c => c.name))
-    newSuggestions.push(...specialCombos)
-    
+      newSuggestions.push(...specialCombos)
+      
     const finalResults = newSuggestions.slice(0, 12)
     console.log('📊 [传统起名] 传统算法完成:', {
       总生成数: newSuggestions.length,
@@ -1320,7 +1320,7 @@ function NameGame() {
                       {suggestion.score && (
                         <span className="bg-yellow-500/20 text-yellow-300 text-xs px-2 py-1 rounded-full">
                           {suggestion.score}分
-                        </span>
+                      </span>
                       )}
                     </div>
                   </div>

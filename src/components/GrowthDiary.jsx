@@ -305,7 +305,7 @@ function GrowthDiary() {
     const diaryContent = diaryEntries.map(entry => {
       return `${entry.timestamp} - ${entry.mood}\n类型: ${entry.type}\n内容: ${entry.content}\n---\n`
     }).join('\n')
-    
+
     const blob = new Blob([diaryContent], { type: 'text/plain' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')

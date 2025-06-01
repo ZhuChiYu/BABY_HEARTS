@@ -416,19 +416,19 @@ function SleepModePlayer({ heartbeatData }) {
 
       {/* 播放列表 */}
       {currentModeConfig.playlist && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="glass-effect rounded-2xl p-6 mb-6"
-        >
-          <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="glass-effect rounded-2xl p-6 mb-6"
+      >
+        <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
             🎵 {currentModeConfig.name} 播放列表
-          </h3>
-          
+        </h3>
+        
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-64 overflow-y-auto">
             {currentModeConfig.playlist.map((track, index) => (
               <button
-                key={index}
+              key={index}
                 onClick={() => selectTrack(index)}
                 className={`p-3 rounded-lg text-left transition-all ${
                   currentTrack === index
@@ -446,14 +446,14 @@ function SleepModePlayer({ heartbeatData }) {
                   </div>
                 </div>
               </button>
-            ))}
-          </div>
-          
+          ))}
+        </div>
+
           <div className="mt-4 text-center text-white/60 text-sm">
             点击任意曲目即可切换播放
           </div>
-        </motion.div>
-      )}
+              </motion.div>
+            )}
 
       {/* 使用说明 */}
       <motion.div

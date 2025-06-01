@@ -887,53 +887,53 @@ function NameGame() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="glass-effect rounded-2xl p-6 mb-6"
+        className="glass-effect rounded-2xl p-4 md:p-6 mb-4 md:mb-6"
       >
-        <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold text-white mb-2 flex items-center justify-center gap-2">
-            <Sparkles className="text-yellow-300" size={28} />
+        <div className="text-center mb-4 md:mb-6">
+          <h2 className="text-xl md:text-2xl font-bold text-white mb-2 flex items-center justify-center gap-2">
+            <Sparkles className="text-yellow-300" size={window.innerWidth < 768 ? 24 : 28} />
             宝宝起名游戏
           </h2>
-          <p className="text-white/70">结合父母姓名，为宝宝生成美好的名字</p>
+          <p className="text-sm md:text-base text-white/70">结合父母姓名，为宝宝生成美好的名字</p>
           
           {/* 模式选择 */}
-          <div className="flex justify-center gap-3 mt-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-2 md:gap-3 mt-4">
             <button
               onClick={() => setNamingMode('ai')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
+              className={`flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2 rounded-lg transition-all text-sm touch-target ${
                 namingMode === 'ai'
                   ? 'bg-purple-500/80 text-white'
                   : 'bg-white/10 text-white/70 hover:text-white'
               }`}
             >
-              <Brain size={18} />
+              <Brain size={16} />
               AI智能起名
             </button>
             <button
               onClick={() => setNamingMode('traditional')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
+              className={`flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2 rounded-lg transition-all text-sm touch-target ${
                 namingMode === 'traditional'
                   ? 'bg-blue-500/80 text-white'
                   : 'bg-white/10 text-white/70 hover:text-white'
               }`}
             >
-              <Database size={18} />
+              <Database size={16} />
               传统起名
             </button>
             <button
               onClick={clearAllData}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg bg-red-500/20 text-red-300 hover:bg-red-500/30 transition-all text-sm"
+              className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-red-500/20 text-red-300 hover:bg-red-500/30 transition-all text-sm touch-target"
               title="清除所有数据重新开始"
             >
-              <RefreshCw size={16} />
+              <RefreshCw size={14} />
               重置
             </button>
           </div>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
           {/* 父母姓名输入 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             <div>
               <label className="block text-white/70 text-sm mb-2">爸爸姓名</label>
               <input
@@ -941,7 +941,7 @@ function NameGame() {
                 value={parentNames.father}
                 onChange={(e) => setParentNames(prev => ({ ...prev, father: e.target.value }))}
                 placeholder="请输入爸爸的姓名"
-                className="w-full bg-white/10 text-white placeholder-white/50 rounded-lg px-4 py-3 border border-white/20 focus:border-white/40 focus:outline-none"
+                className="w-full bg-white/10 text-white placeholder-white/50 rounded-lg px-3 md:px-4 py-3 border border-white/20 focus:border-white/40 focus:outline-none text-sm md:text-base touch-target"
               />
             </div>
             <div>
@@ -951,7 +951,7 @@ function NameGame() {
                 value={parentNames.mother}
                 onChange={(e) => setParentNames(prev => ({ ...prev, mother: e.target.value }))}
                 placeholder="请输入妈妈的姓名"
-                className="w-full bg-white/10 text-white placeholder-white/50 rounded-lg px-4 py-3 border border-white/20 focus:border-white/40 focus:outline-none"
+                className="w-full bg-white/10 text-white placeholder-white/50 rounded-lg px-3 md:px-4 py-3 border border-white/20 focus:border-white/40 focus:outline-none text-sm md:text-base touch-target"
               />
             </div>
           </div>
@@ -959,7 +959,7 @@ function NameGame() {
           {/* 性别选择 */}
           <div>
             <label className="block text-white/70 text-sm mb-3">宝宝性别（可选）</label>
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-2 md:gap-3">
               {[
                 { value: 'unknown', label: '还不知道', icon: '❓' },
                 { value: 'boy', label: '男宝宝', icon: '👶' },
@@ -968,7 +968,7 @@ function NameGame() {
                 <button
                   key={option.value}
                   onClick={() => setBabyGender(option.value)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
+                  className={`flex items-center justify-center gap-2 px-3 md:px-4 py-3 md:py-2 rounded-lg transition-all text-sm touch-target ${
                     babyGender === option.value
                       ? 'bg-white/20 text-white'
                       : 'bg-white/10 text-white/70 hover:text-white'
@@ -988,9 +988,9 @@ function NameGame() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="space-y-4 border-t border-white/20 pt-4"
+                className="space-y-3 md:space-y-4 border-t border-white/20 pt-4"
               >
-                <h3 className="text-white font-semibold text-center mb-3">🤖 AI智能分析</h3>
+                <h3 className="text-white font-semibold text-center mb-3 text-sm md:text-base">🤖 AI智能分析</h3>
                 
                 {/* AI模型选择 */}
                 <div className="mb-4">
@@ -998,7 +998,7 @@ function NameGame() {
                   <select
                     value={selectedModel}
                     onChange={(e) => setSelectedModel(e.target.value)}
-                    className="w-full bg-white/10 text-white rounded-lg px-4 py-3 border border-white/20 focus:border-white/40 focus:outline-none"
+                    className="w-full bg-white/10 text-white rounded-lg px-3 md:px-4 py-3 border border-white/20 focus:border-white/40 focus:outline-none text-sm md:text-base touch-target"
                   >
                     <option value="deepseek-r1:70b" className="bg-purple-800">🧠 DeepSeek R1 70B - 高质量分析（推荐）</option>
                     <option value="qwen3:32b" className="bg-purple-800">⚡ Qwen3 32B - 平衡性能与速度</option>
@@ -1009,14 +1009,14 @@ function NameGame() {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                   <div>
                     <label className="block text-white/70 text-sm mb-2">预产期（可选）</label>
                     <input
                       type="date"
                       value={additionalInfo.birthDate}
                       onChange={(e) => setAdditionalInfo(prev => ({ ...prev, birthDate: e.target.value }))}
-                      className="w-full bg-white/10 text-white rounded-lg px-4 py-3 border border-white/20 focus:border-white/40 focus:outline-none"
+                      className="w-full bg-white/10 text-white rounded-lg px-3 md:px-4 py-3 border border-white/20 focus:border-white/40 focus:outline-none text-sm md:text-base touch-target"
                     />
                   </div>
 
@@ -1025,7 +1025,7 @@ function NameGame() {
                     <select
                       value={additionalInfo.culturalPreference}
                       onChange={(e) => setAdditionalInfo(prev => ({ ...prev, culturalPreference: e.target.value }))}
-                      className="w-full bg-white/10 text-white rounded-lg px-4 py-3 border border-white/20 focus:border-white/40 focus:outline-none"
+                      className="w-full bg-white/10 text-white rounded-lg px-3 md:px-4 py-3 border border-white/20 focus:border-white/40 focus:outline-none text-sm md:text-base touch-target"
                     >
                       <option value="traditional" className="bg-purple-800">传统文化</option>
                       <option value="modern" className="bg-purple-800">现代时尚</option>
@@ -1040,7 +1040,7 @@ function NameGame() {
                     value={additionalInfo.expectations}
                     onChange={(e) => setAdditionalInfo(prev => ({ ...prev, expectations: e.target.value }))}
                     placeholder="比如：健康成长、聪明伶俐、前程似锦..."
-                    className="w-full bg-white/10 text-white placeholder-white/50 rounded-lg px-4 py-3 border border-white/20 focus:border-white/40 focus:outline-none"
+                    className="w-full bg-white/10 text-white placeholder-white/50 rounded-lg px-3 md:px-4 py-3 border border-white/20 focus:border-white/40 focus:outline-none text-sm md:text-base touch-target"
                     rows={3}
                   />
                 </div>
@@ -1055,26 +1055,26 @@ function NameGame() {
               animate={{ opacity: 1 }}
               className="flex justify-start"
             >
-              <div className="bg-pink-400/80 text-white px-6 py-4 rounded-2xl max-w-md">
+              <div className="bg-pink-400/80 text-white px-4 md:px-6 py-3 md:py-4 rounded-2xl max-w-full md:max-w-md">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="animate-bounce">💭</div>
-                  <span className="font-medium">
+                  <span className="font-medium text-sm md:text-base">
                     {namingMode === 'ai' ? 'AI大师正在分析...' : '正在生成名字...'}
                   </span>
                 </div>
                 
                 {/* AI分析进度详情 */}
                 {namingMode === 'ai' && requestStatus && (
-                  <div className="text-sm text-white/90 space-y-2">
+                  <div className="text-xs md:text-sm text-white/90 space-y-2">
                     <div className="flex items-center gap-2">
-                      <Clock size={14} />
+                      <Clock size={12} />
                       <span>
                         已运行 {Math.floor((Date.now() - requestStatus.startTime) / 1000)} 秒
                       </span>
                     </div>
                     
                     {currentRequestId && (
-                      <div className="text-xs text-white/70">
+                      <div className="text-xs text-white/70 hidden md:block">
                         请求ID: {currentRequestId.split('_')[2]}
                       </div>
                     )}
@@ -1083,7 +1083,7 @@ function NameGame() {
                       🤖 正在尝试多个AI模型，确保最佳效果
                     </div>
                     
-                    <div className="text-xs text-white/80">
+                    <div className="text-xs text-white/80 hidden md:block">
                       💡 切换标签不会中断分析，回来时可以看到结果
                     </div>
                     

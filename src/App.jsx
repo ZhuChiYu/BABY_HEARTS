@@ -90,25 +90,25 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
       {/* 标题栏 */}
-      <header className="relative z-50 p-6 text-center">
+      <header className="relative z-50 p-4 md:p-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-2">
+          <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold text-white mb-2">
             Baby Beats
           </h1>
-          <p className="text-xl text-pink-200">心跳的礼物 💕</p>
-          <p className="text-sm text-white/50 mt-2">
+          <p className="text-lg md:text-xl text-pink-200">心跳的礼物 💕</p>
+          <p className="text-xs md:text-sm text-white/50 mt-2 hidden md:block">
             💡 提示：按 Ctrl+Shift+C 可清除所有缓存数据
           </p>
         </motion.div>
       </header>
 
       {/* 导航栏 */}
-      <nav className="relative z-40 px-4 mb-6">
-        <div className="flex flex-wrap justify-center gap-3">
+      <nav className="relative z-40 px-2 md:px-4 mb-4 md:mb-6">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-3 max-w-7xl mx-auto">
           {modules.map((module) => {
             const IconComponent = module.icon
             return (
@@ -116,8 +116,8 @@ function App() {
                 key={module.id}
                 onClick={() => setActiveModule(module.id)}
                 className={`
-                  glass-effect rounded-full px-4 py-2 text-sm font-medium transition-all
-                  flex items-center gap-2
+                  glass-effect rounded-full px-3 py-2 md:px-4 md:py-2 text-xs md:text-sm font-medium transition-all
+                  flex items-center gap-1 md:gap-2 touch-target
                   ${activeModule === module.id 
                     ? 'bg-white/20 text-white heart-glow' 
                     : 'text-white/70 hover:text-white hover:bg-white/10'
@@ -126,8 +126,11 @@ function App() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <IconComponent size={16} />
-                {module.name}
+                <IconComponent size={window.innerWidth < 768 ? 14 : 16} />
+                <span className="hidden sm:inline">{module.name}</span>
+                <span className="sm:hidden">
+                  {module.name.length > 4 ? module.name.substring(0, 3) + '...' : module.name}
+                </span>
               </motion.button>
             )
           })}
@@ -135,7 +138,7 @@ function App() {
       </nav>
 
       {/* 主内容区 */}
-      <main className="relative z-30 px-4 pb-6">
+      <main className="relative z-30 px-2 md:px-4 pb-4 md:pb-6">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeModule}
@@ -143,7 +146,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}
-            className="max-w-6xl mx-auto"
+            className="max-w-7xl mx-auto"
           >
             {ActiveComponent && (
               <ActiveComponent 
@@ -158,10 +161,10 @@ function App() {
       {/* 儿童节特效背景 */}
       {isFirstVisit && (
         <div className="fixed inset-0 pointer-events-none z-10">
-          {[...Array(20)].map((_, i) => (
+          {[...Array(window.innerWidth < 768 ? 10 : 20)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute text-4xl"
+              className="absolute text-2xl md:text-4xl"
               initial={{ 
                 x: Math.random() * window.innerWidth, 
                 y: window.innerHeight + 100,

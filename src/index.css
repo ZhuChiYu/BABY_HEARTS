@@ -28,4 +28,47 @@ body {
 
 .heart-glow {
   box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+}
+
+/* 移动端适配样式 */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  
+  .mobile-scroll {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* 隐藏移动端上的滚动条 */
+  .mobile-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* 针对移动端优化的玻璃效果 */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 13px;
+  }
+}
+
+/* 防止移动端双击缩放 */
+button, input[type="button"], input[type="submit"] {
+  touch-action: manipulation;
+}
+
+/* 移动端友好的触摸目标 */
+@media (max-width: 768px) {
+  button, 
+  input[type="range"], 
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
 } 

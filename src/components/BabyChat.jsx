@@ -344,34 +344,34 @@ function BabyChat() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="glass-effect rounded-2xl p-6 h-[80vh] min-h-[600px] max-h-[800px] flex flex-col"
+        className="glass-effect rounded-2xl p-4 md:p-6 h-[80vh] min-h-[500px] md:min-h-[600px] max-h-[800px] flex flex-col"
       >
         {/* 标题 */}
-        <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold text-white mb-2 flex items-center justify-center gap-2">
-            <Baby className="text-pink-300" size={28} />
+        <div className="text-center mb-4 md:mb-6">
+          <h2 className="text-xl md:text-2xl font-bold text-white mb-2 flex items-center justify-center gap-2">
+            <Baby className="text-pink-300" size={window.innerWidth < 768 ? 24 : 28} />
             AI宝宝对话
           </h2>
-          <p className="text-white/70 mb-3">和{pregnancyInfo.weeks}周{pregnancyInfo.days}天的小宝宝聊天，听听TA想说什么~</p>
+          <p className="text-sm md:text-base text-white/70 mb-3">和{pregnancyInfo.weeks}周{pregnancyInfo.days}天的小宝宝聊天，听听TA想说什么~</p>
           
           {/* 孕周配置 */}
-          <div className="bg-white/10 rounded-lg p-3 text-sm">
-            <div className="flex items-center justify-center gap-4 mb-2">
+          <div className="bg-white/10 rounded-lg p-3 text-xs md:text-sm">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-4 mb-2">
               <span className="text-white/80">末次月经:</span>
               <input
                 type="date"
                 value={lastMenstrualDate}
                 onChange={(e) => setLastMenstrualDate(e.target.value)}
-                className="bg-white/20 text-white rounded px-2 py-1 text-xs border border-white/30"
+                className="bg-white/20 text-white rounded px-2 py-1 text-xs border border-white/30 touch-target"
               />
             </div>
-            <div className="text-pink-200 mb-2">
+            <div className="text-pink-200 mb-2 text-center">
               宝宝现在: {pregnancyInfo.weeks}周{pregnancyInfo.days}天 ({pregnancyInfo.totalDays}天)
             </div>
             
             {/* 语音选择器 */}
             {availableVoices.length > 0 && (
-              <div className="flex items-center justify-center gap-2 text-xs">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-xs">
                 <span className="text-white/80">宝宝声音:</span>
                 <select
                   value={selectedVoice?.name || ''}
@@ -379,7 +379,7 @@ function BabyChat() {
                     const voice = availableVoices.find(v => v.name === e.target.value)
                     if (voice) changeVoice(voice)
                   }}
-                  className="bg-white/20 text-white rounded px-2 py-1 text-xs border border-white/30 flex-1 max-w-40"
+                  className="bg-white/20 text-white rounded px-2 py-1 text-xs border border-white/30 flex-1 max-w-40 touch-target"
                 >
                   {availableVoices.map((voice) => (
                     <option key={voice.name} value={voice.name} className="bg-purple-800">
@@ -390,7 +390,7 @@ function BabyChat() {
                 <button
                   onClick={() => speak('爸爸妈妈好！我是你们的小宝宝~')}
                   disabled={isSpeaking}
-                  className="bg-pink-500/70 hover:bg-pink-500 text-white px-2 py-1 rounded text-xs transition-colors disabled:opacity-50"
+                  className="bg-pink-500/70 hover:bg-pink-500 text-white px-3 py-2 rounded text-xs transition-colors disabled:opacity-50 touch-target"
                 >
                   {isSpeaking ? '🔊' : '试听'}
                 </button>
@@ -400,7 +400,7 @@ function BabyChat() {
         </div>
 
         {/* 聊天区域 */}
-        <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2">
+        <div className="flex-1 overflow-y-auto space-y-3 md:space-y-4 mb-3 md:mb-4 pr-1 md:pr-2 mobile-scroll">
           <AnimatePresence>
             {messages.map((message) => (
               <motion.div
@@ -411,13 +411,13 @@ function BabyChat() {
                 className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[85%] lg:max-w-[70%] px-4 py-3 rounded-2xl ${
+                  className={`max-w-[90%] sm:max-w-[85%] lg:max-w-[70%] px-3 md:px-4 py-2 md:py-3 rounded-2xl ${
                     message.type === 'user'
                       ? 'bg-blue-500/80 text-white'
                       : 'bg-pink-400/80 text-white'
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap break-words leading-relaxed">
+                  <p className="text-xs md:text-sm whitespace-pre-wrap break-words leading-relaxed">
                     {message.content}
                   </p>
                   <div className="flex justify-between items-center mt-2">
@@ -430,10 +430,10 @@ function BabyChat() {
                     {message.type === 'baby' && (
                       <button
                         onClick={() => speak(message.content)}
-                        className="text-white/70 hover:text-white transition-colors"
+                        className="text-white/70 hover:text-white transition-colors p-1 touch-target"
                         disabled={isSpeaking}
                       >
-                        {isSpeaking ? <VolumeX size={16} /> : <Volume2 size={16} />}
+                        {isSpeaking ? <VolumeX size={14} /> : <Volume2 size={14} />}
                       </button>
                     )}
                   </div>
@@ -449,10 +449,10 @@ function BabyChat() {
               animate={{ opacity: 1 }}
               className="flex justify-start"
             >
-              <div className="bg-pink-400/80 text-white px-4 py-3 rounded-2xl max-w-xs">
+              <div className="bg-pink-400/80 text-white px-3 md:px-4 py-2 md:py-3 rounded-2xl max-w-xs">
                 <div className="flex items-center gap-2">
                   <div className="animate-bounce">💭</div>
-                  <span className="text-sm">宝宝正在思考...</span>
+                  <span className="text-xs md:text-sm">宝宝正在思考...</span>
                 </div>
               </div>
             </motion.div>
@@ -463,14 +463,14 @@ function BabyChat() {
         </div>
 
         {/* 输入区域 */}
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-2 md:gap-3">
           <div className="flex-1 relative">
             <textarea
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="和宝宝说点什么吧..."
-              className="w-full bg-white/10 text-white placeholder-white/50 rounded-xl px-4 py-3 pr-12 resize-none border border-white/20 focus:border-white/40 focus:outline-none"
+              className="w-full bg-white/10 text-white placeholder-white/50 rounded-xl px-3 md:px-4 py-2 md:py-3 pr-10 md:pr-12 resize-none border border-white/20 focus:border-white/40 focus:outline-none text-sm md:text-base touch-target"
               rows={2}
               disabled={isLoading}
             />
@@ -478,14 +478,14 @@ function BabyChat() {
             {/* 语音按钮 */}
             <button
               onClick={isListening ? stopListening : startListening}
-              className={`absolute right-3 top-3 p-1 rounded-lg transition-colors ${
+              className={`absolute right-2 md:right-3 top-2 md:top-3 p-1 rounded-lg transition-colors touch-target ${
                 isListening 
                   ? 'bg-red-500/80 text-white' 
                   : 'bg-white/20 text-white/70 hover:text-white'
               }`}
               disabled={isLoading}
             >
-              {isListening ? <MicOff size={16} /> : <Mic size={16} />}
+              {isListening ? <MicOff size={14} /> : <Mic size={14} />}
             </button>
           </div>
 
@@ -493,10 +493,10 @@ function BabyChat() {
           <button
             onClick={sendMessage}
             disabled={!inputMessage.trim() || isLoading}
-            className="bg-heart-red/80 hover:bg-heart-red text-white px-6 py-3 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            className="bg-heart-red/80 hover:bg-heart-red text-white px-4 md:px-6 py-2 md:py-3 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm md:text-base touch-target"
           >
-            <Send size={18} />
-            发送
+            <Send size={16} />
+            <span className="hidden sm:inline">发送</span>
           </button>
         </div>
 
@@ -507,7 +507,7 @@ function BabyChat() {
             animate={{ opacity: 1 }}
             className="text-center mt-2"
           >
-            <span className="text-red-300 text-sm animate-pulse">
+            <span className="text-red-300 text-xs md:text-sm animate-pulse">
               🎤 正在监听...请说话
             </span>
           </motion.div>
@@ -522,7 +522,7 @@ function BabyChat() {
           >
             <button
               onClick={stop}
-              className="text-pink-300 text-sm hover:text-pink-200 transition-colors"
+              className="text-pink-300 text-xs md:text-sm hover:text-pink-200 transition-colors touch-target"
             >
               🔊 点击停止播放
             </button>
@@ -535,7 +535,7 @@ function BabyChat() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
-        className="mt-4 text-center text-white/60 text-sm"
+        className="mt-4 text-center text-white/60 text-xs md:text-sm"
       >
         💡 点击麦克风可以语音输入，宝宝的回复会自动播放语音
       </motion.div>

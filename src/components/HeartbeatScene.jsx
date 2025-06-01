@@ -546,15 +546,15 @@ function HeartbeatScene({ heartbeatData, setHeartbeatData }) {
       </div>
 
       {/* 控制面板 */}
-      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 z-10">
+      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 z-10 w-full max-w-xs sm:max-w-md md:max-w-4xl px-2">
         <motion.div 
-          className="glass-effect rounded-xl p-4 min-w-80 max-w-4xl"
+          className="glass-effect rounded-xl p-3 md:p-4"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1 }}
         >
           <div className="text-center mb-3">
-            <h3 className="text-lg font-bold text-white mb-1">胎心播放器</h3>
+            <h3 className="text-base md:text-lg font-bold text-white mb-1">胎心播放器</h3>
             <p className="text-xs text-white/70">感受生命的律动</p>
           </div>
 
@@ -569,9 +569,10 @@ function HeartbeatScene({ heartbeatData, setHeartbeatData }) {
                   onChange={handleFileUpload}
                   className="hidden"
                 />
-                  <div className="flex items-center justify-center gap-2 bg-heart-red/20 hover:bg-heart-red/30 text-white rounded-lg p-2 transition-all text-sm">
+                  <div className="flex items-center justify-center gap-2 bg-heart-red/20 hover:bg-heart-red/30 text-white rounded-lg p-3 md:p-2 transition-all text-sm touch-target">
                     <Upload size={16} />
-                    上传录音
+                    <span className="hidden sm:inline">上传录音</span>
+                    <span className="sm:hidden">上传</span>
                 </div>
               </label>
             )}
@@ -579,10 +580,11 @@ function HeartbeatScene({ heartbeatData, setHeartbeatData }) {
               {recordingHistory.length > 0 && (
                 <button
                   onClick={() => setShowHistory(!showHistory)}
-                  className="flex items-center gap-2 bg-blue-500/20 hover:bg-blue-500/30 text-white rounded-lg p-2 transition-all text-sm whitespace-nowrap"
+                  className="flex items-center gap-2 bg-blue-500/20 hover:bg-blue-500/30 text-white rounded-lg p-3 md:p-2 transition-all text-sm whitespace-nowrap touch-target"
                 >
                   <Clock size={16} />
-                  历史 ({recordingHistory.length})
+                  <span className="hidden sm:inline">历史 ({recordingHistory.length})</span>
+                  <span className="sm:hidden">历史</span>
                 </button>
               )}
             </div>
@@ -594,7 +596,7 @@ function HeartbeatScene({ heartbeatData, setHeartbeatData }) {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="bg-white/5 rounded-lg p-3 max-h-48 overflow-y-auto"
+                  className="bg-white/5 rounded-lg p-3 max-h-40 md:max-h-48 overflow-y-auto mobile-scroll"
                 >
                   <h4 className="text-white font-medium mb-2 flex items-center gap-2 text-sm">
                     <Music size={14} />
@@ -606,7 +608,7 @@ function HeartbeatScene({ heartbeatData, setHeartbeatData }) {
                         key={recording.id}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className={`p-2 rounded-lg cursor-pointer transition-all text-xs ${
+                        className={`p-3 md:p-2 rounded-lg cursor-pointer transition-all text-xs touch-target ${
                           currentRecording?.id === recording.id
                             ? 'bg-heart-red/20 border border-heart-red/50'
                             : 'bg-white/5 hover:bg-white/10'
@@ -619,7 +621,8 @@ function HeartbeatScene({ heartbeatData, setHeartbeatData }) {
                               {recording.name}
                             </p>
                             <p className="text-white/50 text-xs">
-                              {formatTime(recording.uploadTime)} • {formatFileSize(recording.size)} • {formatDuration(recording.duration)}
+                              <span className="hidden sm:inline">{formatTime(recording.uploadTime)} • </span>
+                              {formatFileSize(recording.size)} • {formatDuration(recording.duration)}
                             </p>
                           </div>
                           <button
@@ -627,7 +630,7 @@ function HeartbeatScene({ heartbeatData, setHeartbeatData }) {
                               e.stopPropagation()
                               deleteFromHistory(recording.id)
                             }}
-                            className="text-red-400 hover:text-red-300 transition-colors ml-2"
+                            className="text-red-400 hover:text-red-300 transition-colors ml-2 p-1 touch-target"
                           >
                             <Trash2 size={12} />
                           </button>
@@ -650,24 +653,24 @@ function HeartbeatScene({ heartbeatData, setHeartbeatData }) {
                       <div className="min-w-0 flex-1">
                         <p className="text-white text-xs font-medium truncate">{audioFile.name}</p>
                         {currentRecording && (
-                          <p className="text-white/60 text-xs">
+                          <p className="text-white/60 text-xs hidden sm:block">
                             {formatTime(currentRecording.uploadTime)}
                           </p>
                         )}
                       </div>
                     </div>
                     <div className="text-white/80 text-xs flex items-center gap-1">
-                      心跳: {Math.round(audioData.volume * 100)}%
+                      <span className="hidden sm:inline">心跳: </span>{Math.round(audioData.volume * 100)}%
                       {isPlaying && <span className="animate-pulse">💗</span>}
                     </div>
                   </div>
                 </div>
 
-                {/* 控制按钮 - 水平布局 */}
-                <div className="flex items-center gap-2">
+                {/* 控制按钮 - 垂直布局适配移动端 */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                 <button
                   onClick={togglePlayPause}
-                    className="flex items-center gap-1 bg-heart-red/20 hover:bg-heart-red/30 text-white rounded-lg px-3 py-2 transition-all text-sm"
+                    className="flex items-center justify-center gap-1 bg-heart-red/20 hover:bg-heart-red/30 text-white rounded-lg px-3 py-3 sm:py-2 transition-all text-sm touch-target"
                 >
                     {isPlaying ? <Pause size={16} /> : <Play size={16} />}
                   {isPlaying ? '暂停' : '播放'}
@@ -680,14 +683,14 @@ function HeartbeatScene({ heartbeatData, setHeartbeatData }) {
                       onChange={handleFileUpload}
                       className="hidden"
                     />
-                    <div className="flex items-center justify-center gap-1 bg-blue-500/20 hover:bg-blue-500/30 text-white rounded-lg p-2 transition-all text-xs">
+                    <div className="flex items-center justify-center gap-1 bg-blue-500/20 hover:bg-blue-500/30 text-white rounded-lg p-3 sm:p-2 transition-all text-xs touch-target">
                       <Upload size={14} />
                       新录音
                     </div>
                   </label>
 
-                  <div className="flex items-center gap-1 flex-1">
-                    <Volume2 size={14} className="text-white" />
+                  <div className="flex items-center gap-2 flex-1 bg-white/5 rounded-lg p-2">
+                    <Volume2 size={14} className="text-white flex-shrink-0" />
                   <input
                     type="range"
                     min="0"
@@ -695,7 +698,7 @@ function HeartbeatScene({ heartbeatData, setHeartbeatData }) {
                     step="0.1"
                     value={volume}
                     onChange={handleVolumeChange}
-                    className="flex-1"
+                    className="flex-1 h-6 touch-target"
                   />
                 </div>
               </div>
@@ -706,9 +709,9 @@ function HeartbeatScene({ heartbeatData, setHeartbeatData }) {
       </div>
 
       {/* 说明文字 */}
-      <div className="absolute top-4 right-4 z-10">
+      <div className="absolute top-4 right-2 md:right-4 z-10 hidden sm:block">
         <motion.div 
-          className="glass-effect rounded-lg p-3 max-w-56"
+          className="glass-effect rounded-lg p-3 max-w-48 md:max-w-56"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 1.5 }}
